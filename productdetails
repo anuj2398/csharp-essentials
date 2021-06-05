@@ -1,0 +1,96 @@
+//Part1 
+
+public class Product
+    {
+        private string productCode, productName;
+        private double productPrice;
+        private char categoryCode;
+        private static int prodCounter = 100;
+        
+        public string ProductCode
+        {
+            get
+            {
+                return productCode;
+            }
+            set
+            {
+                productCode = value;
+            }
+        }
+        public string ProductName
+        {
+            get
+            {
+                return productName;
+            }
+
+            set
+            {
+                productName = value;
+            }
+        }
+        public double ProductPrice
+        {
+            get
+            {
+                return productPrice;
+            }
+            set
+            {
+                productPrice = value;
+            }
+        }
+        public char CategoryCode
+        {
+            get
+            {
+                return categoryCode;
+            }
+
+
+            set
+            {
+                categoryCode = value;
+            }
+        }
+        private string generateProductCode(char cc)
+        {
+            prodCounter++;
+            string str = prodCounter.ToString() + cc;
+            return str;
+        }
+   
+        public Product(string Name, double Price, char Code)
+        {
+            productCode = generateProductCode(Code);
+           // prodCounter++;
+            productName = Name;
+            productPrice = Price;
+            categoryCode = Code;
+        }
+        public Product(string Name, double Price)
+        {
+            char cc = 'E';
+            productCode = generateProductCode(cc);
+           // prodCounter++;
+            productName = Name;
+            productPrice = Price;
+    categoryCode=’E’ ;
+        }
+
+        public string  getProductDetails()
+        {
+           
+          // Code–101E, Name – Laptop Price - 45000.00, Category – E
+            return ("Code-"+productCode.ToString() + ",Name-" + productName + ",Price-" + productPrice.ToString() + ",Category-" + categoryCode.ToString());
+            
+        }
+    }
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
