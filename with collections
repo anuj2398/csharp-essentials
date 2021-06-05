@@ -1,0 +1,99 @@
+
+
+class Movie
+{
+    public string MovieId;
+    public string Name;
+    public int Rating;
+    public string Language;
+}
+
+class Theatre
+{
+    public string Name;
+    public List<Movie> MovieList = new List<Movie>();
+    public Theatre() { }
+    public Theatre(string name, List<Movie> movieList) { this.Name = name; this.MovieList = movieList; }
+    public void AddMovieToTheatre(Movie m)
+    {
+        //Movie m1 = MovieList.FirstOrDefault(x => x.Name == m.Name & x.Language == m.Language);
+        //if (m1 == null)
+        //{
+        //    MovieList.Add(m);
+        //}
+        bool flag = false;
+        for(int i=0; i< MovieList.Count; i++)
+        {
+            if(MovieList[i].Name==m.Name & MovieList[i].Language==m.Language)
+            {
+                flag = true;
+            }
+        }
+        if(flag==false)
+        {
+            MovieList.Add(m);
+        }
+    }
+    public bool UpdateMovie(string movieId, int newrating)
+    {
+        //Movie m1 = MovieList.FirstOrDefault(x => x.MovieId == movieId);
+        //if (m1 == null)
+        //    return false;
+    
+
+
+bool flag=false;
+        for(int i=0; i<MovieList.Count;i++)
+        {
+            if(MovieList[i].MovieId==movieId)
+            {
+                MovieList[i].Rating = newrating;
+                flag = true;
+               // MovieList.Remove(MovieList[i]); 
+            }
+        }
+        return flag;
+    }
+}
+
+
+class MovieBO
+{
+    public List<Movie> FindMovie(List<Movie> movieList, string language)
+    {
+        //List<Movie> l1 = movieList.FindAll(x => x.Language == language);
+        //return l1;
+        List<Movie> l1 = new List<Movie>();
+        foreach(Movie m in movieList)
+        {
+            if (m.Language == language)
+                l1.Add(m);
+        }
+        return l1;
+    }
+    public List<Movie> FindMovie(List<Movie> movieList, int rating)
+    {
+        //List<Movie> l1 = movieList.FindAll(x => x.Rating == rating);
+        List<Movie> l1 = new List<Movie>();
+        foreach (Movie m in movieList)
+        {
+            if (m.Rating == rating)
+                l1.Add(m);
+        }
+        return l1;
+    }
+    
+public Hashtable LanguageWiseCount(List<Movie> movieList)
+    {
+        Hashtable ht = new Hashtable();
+        var l1 = from m in movieList
+                 group m by m.Language into g
+                 select new { lan = g.Key, cnt = g.Count() };
+        foreach (var p in l1)
+        {
+            ht.Add(p.lan, p.cnt);
+        }
+        return ht;
+    }
+}
+
